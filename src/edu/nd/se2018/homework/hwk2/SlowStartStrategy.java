@@ -1,4 +1,4 @@
-package edu.nd.se2018.homework.homework3;
+package edu.nd.se2018.homework.hwk2;
 
 public class SlowStartStrategy implements JockeyBehavior {
 	

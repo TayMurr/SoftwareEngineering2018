@@ -1,4 +1,4 @@
-package edu.nd.se2018.homework.homework3;
+package edu.nd.se2018.homework.hwk2;
 
 public class Main {
 
@@ -11,11 +11,6 @@ public class Main {
 		race.enrollHorse("Blizzard", 3, 25, new SlowStartStrategy());
 		race.enrollHorse("Flicker", 4, 25, new SteadyRunStrategy());
 		
-		/*race.enrollHorse("Sam",0,22,new EarlySprintStrategy());
-		race.enrollHorse("Molly",1,22,new EarlySprintStrategy());
-		
-		race.enrollHorse("Sam",0,100,new EarlySprintStrategy());
-		race.enrollHorse("Molly",1,100,new SlowStartStrategy());*/
 		race.runRace();
 		
 	}

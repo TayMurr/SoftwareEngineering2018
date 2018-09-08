@@ -1,4 +1,4 @@
-package edu.nd.se2018.homework.homework3;
+package edu.nd.se2018.homework.hwk2;
 
 import java.util.ArrayList;
 
@@ -13,7 +13,8 @@ public class Race {
 		horseList.add(new Horse(name, index, maxSpeed, jockeybehavior));
 	}
 	
-	public void runRace() {
+	public String runRace() {
+		String winnerMessage = "";
 		
 		while (true) {
 			
@@ -33,13 +34,16 @@ public class Race {
 				}
 			}
 			
-			// announce
 			if (maxDistance >= 10.0) {
-				System.out.println(topHorse + " is the winner");
+				winnerMessage = "Winner is " + topHorse;
 				break;
 			}
 			
 		}
+		
+		System.out.println(winnerMessage);
+		return winnerMessage;
+		
 		
 	}
 }
