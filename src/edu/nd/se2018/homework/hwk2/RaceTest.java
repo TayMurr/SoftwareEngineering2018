@@ -11,10 +11,11 @@ public class RaceTest {
 	public void test1() {
 		Race race = new Race();
 		
+		
 		race.enrollHorse("Zippy", 0, 24, new EarlySprintStrategy());
 		race.enrollHorse("WhyTheLongFace", 1, 26, new SlowStartStrategy());
 		race.enrollHorse("SilverBullet", 2, 23, new EarlySprintStrategy());
-
+		assert(race.horseList.size() == 3);
 		
 	}
 
@@ -57,13 +58,9 @@ public class RaceTest {
 	
 	@Test
 	public void test5() {
-		Race race = new Race();
-		
-		race.enrollHorse("Sam", 0, 22, new SteadyRunStrategy());
-		race.enrollHorse("Molly", 1, 24, new SlowStartStrategy());
-	
-		
-		assert(race.runRace().equals("Winner is Molly"));
+		Horse horse = new Horse("Buck", 0, 80, new EarlySprintStrategy());
+		assert(horse.maxSpeed == 80);
+		assert(horse.name == "Buck");
 		
 	}
 }
