@@ -1,18 +1,16 @@
 package edu.nd.se2018.homework.hwk2;
 
 public class EarlySprintStrategy implements JockeyBehavior {
-	
-	boolean twoMileSwitch = true; // switch maxSpeed once
-	
+		
 	@Override
 	public void stepOneMinute(Horse horse) {
 		horse.minutesRan++;
-		
-		horse.milesRan = (horse.maxSpeed / 60) * horse.minutesRan;
-	
-		if ((horse.milesRan > 2) && twoMileSwitch) { 
-			horse.maxSpeed = horse.maxSpeed * 0.75;
-			twoMileSwitch = false;
+			
+		if (horse.milesRan > 2) { 
+			horse.milesRan = (horse.maxSpeed * 0.75 / 60) * horse.minutesRan;
+
+		} else {
+			horse.milesRan = (horse.maxSpeed / 60) * horse.minutesRan;
 		}
 		
 	}
