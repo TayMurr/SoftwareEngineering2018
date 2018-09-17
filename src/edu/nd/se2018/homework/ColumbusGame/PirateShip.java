@@ -48,6 +48,7 @@ public class PirateShip implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof Ship) {
+			// store location of regule ship
 			x1 =  ((Ship)o).getShipLocationX();
 			y1 = ((Ship)o).getShipLocationY();
 
@@ -59,12 +60,13 @@ public class PirateShip implements Observer {
 		shipx = this.getShipLocationX();
 		shipy = this.getShipLocationY();
 		
-		// use distance function to determine direction to move closer
+		// use distance to determine which directions to move
 		int currentDistanceX = shipx - x1;
 		int currentDistanceY = shipx - x1;
 
 		// moving down
 		// if it is an option to move down check if moving that way would move you closer to the ship
+		
 		if (currentDistanceX > 0) {
 			if ((shipx-1) > -1 && omap.oceanGrid[shipx-1][shipy] != true) { // moveLeft
 
@@ -88,7 +90,7 @@ public class PirateShip implements Observer {
 			} 
 		}
 		
-
+		// update the view
 		pirateShipImageView.setX(this.getShipLocationX() * scale);
 		pirateShipImageView.setY(this.getShipLocationX() * scale);
 		

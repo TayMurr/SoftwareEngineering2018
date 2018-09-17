@@ -18,7 +18,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class OceanExplorer extends Application {
-	boolean[][] islandMap;
 	AnchorPane root;
 	final int dimensions = 10;
 	final int islandCount = 10;
@@ -51,17 +50,15 @@ public class OceanExplorer extends Application {
 		
 		oceanMap.placeIslands(root.getChildren());
 		
-		
-		
 		scene = new Scene(root, 625, 625);
 		oceanStage.setScene(scene);
 		oceanStage.setTitle("My Island");
 		oceanStage.show();
 		startSailing();
 		
-		System.out.println("daf");
 	}
 	
+	// load the ship image
 	public void loadShipImage() {
 		ship = new Ship(oceanMap); // start the ship at the upper left 
 		shipImage = new Image("images/ColumbusShip.png",scale, scale, true, true);
@@ -72,15 +69,15 @@ public class OceanExplorer extends Application {
 		root.getChildren().add(shipImageView);
 		
 	}
-	// create new pirates ships placed randomly
+	// load the priate images
 	public void loadPirateShips() {
+		// add pirates to list
 		for (int i = 0; i < numberOfPirates; i++) {
 			PirateShip p = new PirateShip(oceanMap);
 			pirates.add(p);
 
-
 		}
-
+		// loop through all pirates, add them to the root and set heir position
 		for (PirateShip p: pirates) {
 			ship.addObserver(p);
 			ImageView pirateShipImageView = p.getImageView();

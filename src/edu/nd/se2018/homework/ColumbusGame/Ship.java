@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.util.Observable;
 
 public class Ship extends Observable {
-	int x = 14;
+	int x = 14; // the ships default position
 	int y = 14;
 	OceanMap omap;
 	int scale;
