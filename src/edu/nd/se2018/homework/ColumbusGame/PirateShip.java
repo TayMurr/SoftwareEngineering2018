@@ -71,7 +71,7 @@ public class PirateShip implements Observer {
 				shipx = shipx - 1;
 			}
 			
-		} else {
+		} else if (currentDistanceX < 0) {
 			if ((shipx+1) < omap.dimensions && omap.oceanGrid[shipx+1][shipy] != true) { //move right
 				shipx = shipx + 1;
 			}
@@ -81,7 +81,7 @@ public class PirateShip implements Observer {
 			if ((shipy-1) > -1 && omap.oceanGrid[shipx][shipy-1] != true) { // move up
 				shipy = shipy - 1;
 			}
-		} else {
+		} else if (currentDistanceY < 0){
 			if ((shipy + 1) < omap.dimensions &&  omap.oceanGrid[shipx][shipy+1] != true) { // move down
 				shipy = shipy + 1;
 
