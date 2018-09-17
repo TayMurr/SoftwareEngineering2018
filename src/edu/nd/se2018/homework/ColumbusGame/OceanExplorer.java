@@ -1,4 +1,4 @@
-package edu.nd.se2018.homework.hwk4;
+package edu.nd.se2018.homework.ColumbusGame;
 
 import java.awt.Point;
 import java.util.LinkedList;
@@ -58,6 +58,12 @@ public class OceanExplorer extends Application {
 		oceanStage.setTitle("My Island");
 		oceanStage.show();
 		startSailing();
+		
+		for (PirateShip p : pirates) {
+			if (ship.getShipLocationX() == p.getShipLocationX() && ship.getShipLocationY() == p.getShipLocationY() ) {
+				System.exit(0);
+			}
+		}
 	}
 	
 	public void loadShipImage() {
@@ -87,6 +93,7 @@ public class OceanExplorer extends Application {
 			root.getChildren().add(p.getImageView());
 
 		}
+		
 		
 
 	}
