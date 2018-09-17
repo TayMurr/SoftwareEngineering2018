@@ -23,7 +23,6 @@ public class PirateShip implements Observer {
 		this.scale = omap.scale;
 		shipx = rand.nextInt(scale-1);
 		shipy = rand.nextInt(scale-1);
-		omap.oceanGrid[shipx][shipy] = true;
 		pirateShipImage = new Image("images/pirateship.gif",scale, scale, true, true);
 		pirateShipImageView = new ImageView(pirateShipImage);
 
