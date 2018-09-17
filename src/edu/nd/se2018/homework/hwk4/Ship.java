@@ -44,7 +44,7 @@ public class Ship extends Observable {
 
 	public void moveDown() {
 		int temp = this.y + 1;
-		if (temp < omap.dimensions && omap.oceanGrid[(int) this.x][(int) temp] != true) {
+		if (temp < omap.dimensions && omap.oceanGrid[this.x][ temp] != true) {
 			this.y = temp;
 
 			setChanged();		// The observable object has moved.  To include recent changes you *MUST* have this line
@@ -55,7 +55,7 @@ public class Ship extends Observable {
 
 	public void moveUp() {
 		int temp = this.y - 1;
-		if (temp > -1  && omap.oceanGrid[(int) this.x][(int) temp] != true) {
+		if (temp > -1  && omap.oceanGrid[this.x][temp] != true) {
 			this.y = temp;
 			setChanged();		// The observable object has moved.  To include recent changes you *MUST* have this line
 			notifyObservers();

@@ -52,7 +52,6 @@ public class PirateShip implements Observer {
 			x1 =  ((Ship)o).getShipLocationX();
 			y1 = ((Ship)o).getShipLocationY();
 
-
 			movePirate();
 		}
 	}
@@ -61,39 +60,36 @@ public class PirateShip implements Observer {
 		shipx = this.getShipLocationX();
 		shipy = this.getShipLocationY();
 		
-		
-		int currentDistance = distance(shipx, x1, shipy, y1);
-		System.out.println("current distance" + currentDistance);
+		// use distance function to determine direction to move closer
+		int currentDistanceX = shipx - x1;
+		int currentDistanceY = shipx - x1;
+
 		// moving down
 		// if it is an option to move down check if moving that way would move you closer to the ship
-		if ((shipy + 1) < omap.dimensions &&  omap.oceanGrid[shipx][shipy+1] != true) { // move down
-			int distDown = distance(shipx, x1, shipy+1, y1);
+		if (currentDistanceX > 0) {
+			if ((shipx-1) > -1 && omap.oceanGrid[shipx-1][shipy] != true) { // moveLeft
 
-			if (distDown < currentDistance) {
-				shipy = shipy + 1;
-			}
-		} else if ((shipy-1) > -1 && omap.oceanGrid[shipx][shipy-1] != true) { // move up
-			int distUp = distance(shipx, x1, shipy-1, y1);
-
-			if (distUp < currentDistance) {
-				shipy = shipy - 1;
-
-			}
-		} else if ((shipx+1) < omap.dimensions && omap.oceanGrid[shipx+1][shipy] != true) { //move right
-			int distRight = distance(shipx+1, x1, shipy, y1);
-
-			if (distRight < currentDistance) {
-				shipx = shipx + 1;
-
-			}
-		} else if ((shipx-1) > -1 && omap.oceanGrid[shipx-1][shipy] != true) { // moveLeft
-			int distLeft = distance(shipx-1, x1, shipy, y1);
-
-			if (distLeft < currentDistance) {
 				shipx = shipx - 1;
-
 			}
+			
+		} else {
+			if ((shipx+1) < omap.dimensions && omap.oceanGrid[shipx+1][shipy] != true) { //move right
+				shipx = shipx + 1;
+			}
+		} 
+		
+		if (currentDistanceY > 0) {
+			if ((shipy-1) > -1 && omap.oceanGrid[shipx][shipy-1] != true) { // move up
+				shipy = shipy - 1;
+			}
+		} else {
+			if ((shipy + 1) < omap.dimensions &&  omap.oceanGrid[shipx][shipy+1] != true) { // move down
+				shipy = shipy + 1;
+
+			} 
 		}
+		
+
 		System.out.println(this.getShipLocationX());
 		System.out.println(this.getShipLocationY());
 
@@ -102,10 +98,5 @@ public class PirateShip implements Observer {
 		
 	}
 
-	// calculate the square of the distance from the pirate ship to the regular ship
-	
-	public int distance(int x1, int x2, int y1, int y2) {
-		return ((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1));
-	}
 
 }
