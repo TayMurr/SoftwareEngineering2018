@@ -89,9 +89,6 @@ public class PirateShip implements Observer {
 		}
 		
 
-		System.out.println(this.getShipLocationX());
-		System.out.println(this.getShipLocationY());
-
 		pirateShipImageView.setX(this.getShipLocationX() * scale);
 		pirateShipImageView.setY(this.getShipLocationX() * scale);
 		

@@ -59,11 +59,7 @@ public class OceanExplorer extends Application {
 		oceanStage.show();
 		startSailing();
 		
-		for (PirateShip p : pirates) {
-			if (ship.getShipLocationX() == p.getShipLocationX() && ship.getShipLocationY() == p.getShipLocationY() ) {
-				System.exit(0);
-			}
-		}
+		System.out.println("daf");
 	}
 	
 	public void loadShipImage() {
