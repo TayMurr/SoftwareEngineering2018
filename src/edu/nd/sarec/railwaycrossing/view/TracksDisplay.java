@@ -15,7 +15,7 @@ import javafx.scene.shape.Line;
 public class TracksDisplay implements IDisplay {
 	Pane root;
 	Collection<RailwayTracks> tracks;
-	int trackSize = 16;
+	int trackSize = 16; // TODO change back to 16
 	
 	public TracksDisplay(Collection<RailwayTracks> tracks, Pane root){
 		this.root = root;
@@ -24,7 +24,8 @@ public class TracksDisplay implements IDisplay {
 	
 	@Override
 	public void draw() {
-		for(RailwayTracks track: tracks){
+		
+		for(RailwayTracks track: tracks){ 
 			root.getChildren().add(new Line(track.getStartX(),track.getStartY()-trackSize,track.getEndX(),track.getEndY()-trackSize));
 			root.getChildren().add(new Line(track.getStartX(),track.getStartY()+trackSize,track.getEndX(),track.getEndY()+trackSize));
 			for(int j = track.getStartX()+(trackSize/2); j < track.getEndX(); j+=trackSize){

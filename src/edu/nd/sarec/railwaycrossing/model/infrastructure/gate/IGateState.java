@@ -12,4 +12,5 @@ public interface IGateState {
 	public void gateFinishedClosing();
 	public void operate();
 	public String getTrafficAction();
+	public String getGateAction();
 }

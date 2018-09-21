@@ -22,7 +22,6 @@ public class CrossingGate extends Observable implements Observer{
 	private int movingY;
 	private int triggerPoint;
 	private int exitPoint;
-
 	private IGateState gateClosed;
 	private IGateState gateOpen;
 	private IGateState gateClosing;
@@ -74,7 +73,7 @@ public class CrossingGate extends Observable implements Observer{
 			line.setEndX(movingX);
 			line.setEndY(movingY);
 		} else {
-			currentGateState.gateFinishedOpening();
+			currentGateState.gateFinishedClosing();
 		}
 	}
 	
@@ -119,11 +118,14 @@ public class CrossingGate extends Observable implements Observer{
 	public void update(Observable o, Object arg) {
 		if (o instanceof Train){
 			Train train = (Train)o;
-			if (train.getVehicleX() < exitPoint)
-				currentGateState.leaveStation();
-			else if(train.getVehicleX() < triggerPoint){
-				currentGateState.approachStation();
-			} 
+			String dir = train.getTrainDirection();
+			
+				if (train.getVehicleX() < exitPoint) {
+					currentGateState.leaveStation();
+				} else if(train.getVehicleX() < triggerPoint){
+					currentGateState.approachStation();
+				} 
+
 		}	
 	}
 }

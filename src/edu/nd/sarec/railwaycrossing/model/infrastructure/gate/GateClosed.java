@@ -44,6 +44,12 @@ public class GateClosed implements IGateState {
 	public String getTrafficAction() {
 		return "STOP";
 	}
+
+	@Override
+	public String getGateAction() {
+		// the gate is already closed
+		return "NOTCLOSING";
+	}
 	
 	
 }

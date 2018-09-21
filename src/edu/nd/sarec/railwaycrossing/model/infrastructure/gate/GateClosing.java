@@ -46,5 +46,10 @@ public class GateClosing implements IGateState{
 		return "STOP";
 	}
 	
+	@Override
+	public String getGateAction() {
+		return "CLOSING";
+	}
+	
 
 }

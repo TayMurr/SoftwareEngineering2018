@@ -39,7 +39,13 @@ public class MapBuilder {
 	}
 	
 	private void buildTracks(){
-		tracks.put("Royal", new RailwayTracks(new Point(0,500),new Point(1200,500)));
+		RailwayTracks firstTrack = new RailwayTracks(new Point(0,500),new Point(1200,500));
+		RailwayTracks secondTrack = new RailwayTracks(new Point(0,548),new Point(1200,548));
+		//System.out.println(firstTrack.toString());
+		//System.out.println(secondTrack.toString());
+		tracks.put("Royal", firstTrack);
+		tracks.put("aRoyal", secondTrack); // TODO adjust position
+
 	}
 	
 	private void assignGatesToRoads(){

@@ -15,6 +15,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.scene.transform.Rotate;
 
 public class Simulation extends Application{
 	
@@ -42,12 +43,26 @@ public class Simulation extends Application{
 				
 		// Train
 		RailwayTracks track = mapBuilder.getTrack("Royal");
-		Train train = new Train(track.getEndX()+100,track.getEndY()-25);
+		RailwayTracks track1 = mapBuilder.getTrack("aRoyal");
+
+		Train train = new Train(track.getEndX()+100,track.getEndY()-25, "left");
+
+
+		Train train1 = new Train(track1.getStartX()-100,track1.getEndY()+25, "right");
+
+		train1.getImageView().setRotate(180);
+		train1.getImageView().setRotationAxis(Rotate.Y_AXIS);
 		root.getChildren().add(train.getImageView());
+		root.getChildren().add(train1.getImageView());
+		
 		
 		for(CrossingGate gate: mapBuilder.getAllGates())
 			train.addObserver(gate);
-				
+			
+		// TODO added observer correctly
+		for(CrossingGate gate: mapBuilder.getAllGates())
+			train1.addObserver(gate);
+		
 		// Sets up a repetitive loop i.e., in handle that runs the actual simulation
 		new AnimationTimer(){
 
@@ -56,13 +71,15 @@ public class Simulation extends Application{
 			
 				createCar();
 				train.move();
-				
+				train1.move();
+
 				for(CrossingGate gate: mapBuilder.getAllGates())
 					gate.operateGate();
 				
-				if (train.offScreen())
+				if (train.offScreen()) {
 					train.reset();
-						
+					train1.reset();
+				}
 				clearCars();				
 			}
 		}.start();
