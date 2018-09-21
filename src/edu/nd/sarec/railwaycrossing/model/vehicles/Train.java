@@ -2,6 +2,7 @@ package edu.nd.sarec.railwaycrossing.model.vehicles;
 
 import java.util.Observable;
 
+import edu.nd.sarec.railwaycrossing.model.infrastructure.Direction;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,10 +19,10 @@ public class Train extends Observable implements IVehicle{
 	private Image img;
 	private ImageView imgView;
 	private int trainLength = 35;
-	private String direction = "";
+	private Direction direction;
 	
 	// TODO direction of train
-	public Train(int x, int y, String direction){
+	public Train(int x, int y, Direction direction){
 		this.currentX = x;
 		this.currentY = y;
 		this.direction = direction;
@@ -40,20 +41,25 @@ public class Train extends Observable implements IVehicle{
 		return currentY;
 	}
 	
+	public void setVehicleX(double x){
+		currentX = x;
+	}
+	
+	
 	public void move(){
-		if (direction == "left") {
+		if (direction == Direction.WEST) {
 			currentX-=2;
 		} else {
 			currentX+=2;
 		}
 		
-		imgView.setX(currentX);
+		/*imgView.setX(currentX);
 		setChanged();
-		notifyObservers();
+		notifyObservers();*/
 	}
 	
 	public boolean offScreen(){
-		if (currentX < -200)
+		if ((this.getTrainDirection() == Direction.WEST  && currentX < -200) || (this.getTrainDirection() == Direction.EAST  && currentX > 1400))
 			return true;
 		else
 			return false;				
@@ -68,7 +74,7 @@ public class Train extends Observable implements IVehicle{
 		return imgView;
 	}
 	
-	public String getTrainDirection() {
+	public Direction getTrainDirection() {
 		return direction;
 	}
 }

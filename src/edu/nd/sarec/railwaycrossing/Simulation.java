@@ -7,8 +7,10 @@ import edu.nd.sarec.railwaycrossing.model.infrastructure.MapBuilder;
 import edu.nd.sarec.railwaycrossing.model.infrastructure.RailwayTracks;
 import edu.nd.sarec.railwaycrossing.model.infrastructure.Road;
 import edu.nd.sarec.railwaycrossing.model.infrastructure.gate.CrossingGate;
+import edu.nd.sarec.railwaycrossing.model.infrastructure.Direction;
 import edu.nd.sarec.railwaycrossing.model.vehicles.Car;
 import edu.nd.sarec.railwaycrossing.model.vehicles.Train;
+import edu.nd.sarec.railwaycrossing.model.vehicles.TrainTraffic;
 import edu.nd.sarec.railwaycrossing.view.MapDisplay;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -45,24 +47,23 @@ public class Simulation extends Application{
 		RailwayTracks track = mapBuilder.getTrack("Royal");
 		RailwayTracks track1 = mapBuilder.getTrack("aRoyal");
 
-		Train train = new Train(track.getEndX()+100,track.getEndY()-25, "left");
+		Train train = new Train(track.getEndX()+100,track.getEndY()-25, Direction.WEST);
+		Train train1 = new Train(track1.getStartX()-100,track1.getEndY()+25, Direction.EAST);
 
-
-		Train train1 = new Train(track1.getStartX()-100,track1.getEndY()+25, "right");
-
-		train1.getImageView().setRotate(180);
+		train1.getImageView().setRotationAxis(Rotate.X_AXIS);
 		train1.getImageView().setRotationAxis(Rotate.Y_AXIS);
 		root.getChildren().add(train.getImageView());
 		root.getChildren().add(train1.getImageView());
 		
+		// Train Traffic
+		TrainTraffic trainTraffic = new TrainTraffic();
+		trainTraffic.addTrain(train);
+		trainTraffic.addTrain(train1);
 		
 		for(CrossingGate gate: mapBuilder.getAllGates())
-			train.addObserver(gate);
-			
-		// TODO added observer correctly
-		for(CrossingGate gate: mapBuilder.getAllGates())
-			train1.addObserver(gate);
-		
+			trainTraffic.addObserver(gate);
+
+	
 		// Sets up a repetitive loop i.e., in handle that runs the actual simulation
 		new AnimationTimer(){
 
@@ -70,15 +71,17 @@ public class Simulation extends Application{
 			public void handle(long now) {
 			
 				createCar();
-				train.move();
-				train1.move();
-
+				trainTraffic.move();
+				//train.move();
 				for(CrossingGate gate: mapBuilder.getAllGates())
 					gate.operateGate();
 				
-				if (train.offScreen()) {
-					train.reset();
-					train1.reset();
+				
+				Collection<Train> trains = trainTraffic.getTrainTraffic();
+				for (Train train : trains) {
+					if (train.offScreen()) {
+						train.reset();
+					}
 				}
 				clearCars();				
 			}

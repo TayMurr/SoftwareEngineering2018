@@ -41,10 +41,9 @@ public class MapBuilder {
 	private void buildTracks(){
 		RailwayTracks firstTrack = new RailwayTracks(new Point(0,500),new Point(1200,500));
 		RailwayTracks secondTrack = new RailwayTracks(new Point(0,548),new Point(1200,548));
-		//System.out.println(firstTrack.toString());
-		//System.out.println(secondTrack.toString());
+
 		tracks.put("Royal", firstTrack);
-		tracks.put("aRoyal", secondTrack); // TODO adjust position
+		tracks.put("aRoyal", secondTrack);
 
 	}
 	
@@ -71,6 +70,6 @@ public class MapBuilder {
 	}
 	
 	public RailwayTracks getTrack(String name){
-		return tracks.get("Royal");
+		return tracks.get("Royal"); // TODO moves the other track off 
 	}
 }
