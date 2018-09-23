@@ -21,11 +21,12 @@ public class Car extends Observable implements IVehicle, Observer {
 	private double originalY = 0;
 	private boolean gateDown = false;
 	private double leadCarY = -1;  // Current Y position of car directly infront of this one
+	private double leadCarX = -1;
 	private double speed = 0.5;
 	boolean canMove = true;
 	boolean headWest;
-	private Car leadCar = null;
-	private Car tailCar = null;
+	boolean travelingEW = false;
+	private String leadCarMessage = "going south";
 	/**
 	 * Constructor
 	 * @param x initial x coordinate of car
@@ -39,13 +40,10 @@ public class Car extends Observable implements IVehicle, Observer {
 		ivCar.setX(getVehicleX());
 		ivCar.setY(getVehicleY());
 		Random ran = new Random();
-		//System.out.println(ran.nextInt(2));
 		if (ran.nextInt(2) == 1) {
 			headWest = true;
-			System.out.print("headed left");
 		} else {
 			headWest = false;
-			System.out.print("headed south");
 
 		}
 	}
@@ -72,26 +70,30 @@ public class Car extends Observable implements IVehicle, Observer {
 	
 	public void move(){
 		boolean canMove = true; 
-	
+
 		// First case.  Car is at the front of the stopping line.
 		if (gateDown && getVehicleY() < 430 && getVehicleY()> 390)
 			canMove = false;
 		
 		// Second case. Car is too close too other car.
-		if (leadCarY != -1  && getDistanceToLeadCar() < 50)
+		if (leadCarMessage == "going south" && leadCarY != -1 && getDistanceToLeadCarY() < 50) // TODO always calculates y distance needs fixing for EW road
+			canMove = false;
+	
+		if (leadCarMessage == "going west" && leadCarX != -1 &&  getDistanceToLeadCarX() < 50) // TODO always calculates y distance needs fixing for EW road
 			canMove = false;
 		
 		if (canMove){ 
-			
 			if (headWest && (currentY > 782) && (currentY < 818)) {
 					currentX-=speed;
-					
-					if (currentX > 370 && currentX < 390) {
+					travelingEW = true;
+					if ((currentX > 370) && (currentX < 390)) {
 						headWest = false;
+						travelingEW = false;
+
 					}
-				
 			} else {
 				currentY+=speed;
+				travelingEW = false;
 			}
 			
 		}
@@ -100,7 +102,12 @@ public class Car extends Observable implements IVehicle, Observer {
 		ivCar.setX(currentX);
 		ivCar.setY(currentY);
 		setChanged();
-		notifyObservers();
+		if (travelingEW) {
+			notifyObservers("going west");
+		} else {
+			notifyObservers("going south");
+		}
+	
 
 
 	}
@@ -128,7 +135,14 @@ public class Car extends Observable implements IVehicle, Observer {
 		currentY = originalY;
 	}
 	
-	public double getDistanceToLeadCar(){
+	public double getDistanceToLeadCarX() {
+		System.out.println("calculating x distance");
+		return Math.abs(leadCarX-getVehicleX());
+		
+	}
+	
+	public double getDistanceToLeadCarY() {
+		System.out.println("calculating y distance");
 		return Math.abs(leadCarY-getVehicleY());
 	}
 	
@@ -136,18 +150,51 @@ public class Car extends Observable implements IVehicle, Observer {
 		leadCarY = -1;
 	}
 	
-	/*public Car getLeadCar() {
+	public void removeLeadCarX(){
+		leadCarX = -1;
+	}
+
+	public boolean entertingJunction() {
+		if ((currentY > 782) && (currentY < 818)) {
+			return true;
+		} 
 		
-	}*/
+		return false;
+	}
+	
+	public boolean exitingJunction() {
+		if (currentX > 370 && currentX < 390) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean isHeadedWest() {
+		return headWest;
+	}
+	
+	public boolean isTravelingEW() {
+		
+		if (headWest && (currentY > 782) && (currentY < 818)) {
+			travelingEW = true;
+			if ((currentX > 370) && (currentX < 390)) {
+				travelingEW = false;
+			}
+		}
+		return travelingEW;
+	}
+
 
 	@Override
 	public void update(Observable o, Object arg1) {
 		if (o instanceof Car){
-			
+			leadCarMessage = (String)arg1;
 			leadCarY = (((Car)o).getVehicleY());
-
+			leadCarX = (((Car)o).getVehicleX());
 			if (leadCarY > 1020)
 				leadCarY = -1;
+			if (leadCarX < 390)
+				leadCarX = -1;
 		}
 			
 		if (o instanceof CrossingGate){

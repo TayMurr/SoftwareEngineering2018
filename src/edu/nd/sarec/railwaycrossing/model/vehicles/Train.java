@@ -53,9 +53,6 @@ public class Train extends Observable implements IVehicle{
 			currentX+=2;
 		}
 		
-		/*imgView.setX(currentX);
-		setChanged();
-		notifyObservers();*/
 	}
 	
 	public boolean offScreen(){
