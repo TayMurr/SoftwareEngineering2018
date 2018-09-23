@@ -6,6 +6,7 @@ import java.util.Collection;
 import edu.nd.sarec.railwaycrossing.model.infrastructure.MapBuilder;
 import edu.nd.sarec.railwaycrossing.model.infrastructure.RailwayTracks;
 import edu.nd.sarec.railwaycrossing.model.infrastructure.Road;
+import edu.nd.sarec.railwaycrossing.model.infrastructure.TJunction;
 import edu.nd.sarec.railwaycrossing.model.infrastructure.gate.CrossingGate;
 import edu.nd.sarec.railwaycrossing.model.infrastructure.Direction;
 import edu.nd.sarec.railwaycrossing.model.vehicles.Car;
@@ -111,6 +112,15 @@ public class Simulation extends Application{
 				}
 			}
 		}
+	}
+	
+	private void clearIntersection(String name) {
+		TJunction tJunction = mapBuilder.getTJunction(name);
+		
+		for (Car car : tJunction.getCars()) {
+			
+		}
+		
 	}
 	
 	public static void main(String[] args){

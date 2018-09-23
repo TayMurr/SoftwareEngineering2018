@@ -20,7 +20,7 @@ public class CarFactory {
 	private ArrayList<Car> cars = new ArrayList<Car>();
 	Direction direction;
 	Point location;
-	
+
 	public CarFactory(){}
 	
 	public CarFactory(Direction direction, Point location, Collection<CrossingGate> gates){
@@ -33,7 +33,7 @@ public class CarFactory {
 	public Car buildCar(){
 		Car car = new Car(location.x,location.y);	
 		double speedVariable = (Math.random() * 10)/10;
-		car.setSpeed((2-speedVariable)*1.5); 
+		car.setSpeed((1.5-speedVariable)*1.5); 
 			
 		// All cars created by this factory must be aware of crossing gates in the road
 		for(CrossingGate gate: gates){

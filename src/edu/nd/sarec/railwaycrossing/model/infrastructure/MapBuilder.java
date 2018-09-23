@@ -15,16 +15,25 @@ public class MapBuilder {
 	HashMap<String, Road> roads;
 	HashMap<String, CrossingGate> gates;
 	HashMap<String, RailwayTracks> tracks;
+	HashMap<String, TJunction> tJunctions;
 	
 	public MapBuilder(){
 		roads = new HashMap<String,Road>();	
 		gates = new HashMap<String,CrossingGate>();
 		tracks = new HashMap<String,RailwayTracks>();
+		tJunctions = new HashMap<String, TJunction>();
 		buildRoads();
 		buildCrossingGates();
 		buildTracks();
 		assignGatesToRoads();
 		buildCarFactories();
+		buildTJunctions();
+	}
+
+	// creates the TJunctions for the simulatoin
+	private void buildTJunctions() {
+		tJunctions.put("tJunction1", new TJunction());
+		
 	}
 
 	private void buildRoads(){
@@ -57,6 +66,9 @@ public class MapBuilder {
 		roads.get("Skyway").addCarFactory();
 	}
 	
+	public Collection<TJunction> getAllTJunctions() {
+		return tJunctions.values();
+	}
 	public Collection<CrossingGate> getAllGates(){
 		return gates.values();
 	}
@@ -72,4 +84,10 @@ public class MapBuilder {
 	public RailwayTracks getTrack(String name){
 		return tracks.get("Royal"); // TODO moves the other track off 
 	}
+	
+	public TJunction getTJunction(String name) {
+		return tJunctions.get(name);
+	}
+	
+	
 }

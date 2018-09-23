@@ -14,7 +14,7 @@ import javafx.scene.image.ImageView;
  * @author jane
  *
  */
-public class Car extends Observable implements IVehicle, Observer{
+public class Car extends Observable implements IVehicle, Observer {
 	private ImageView ivCar;
 	private double currentX = 0;
 	private double currentY = 0;
@@ -23,9 +23,9 @@ public class Car extends Observable implements IVehicle, Observer{
 	private double leadCarY = -1;  // Current Y position of car directly infront of this one
 	private double speed = 0.5;
 	boolean canMove = true;
-	String highWay = "Western Highway";
 	boolean headWest;
-	
+	private Car leadCar = null;
+	private Car tailCar = null;
 	/**
 	 * Constructor
 	 * @param x initial x coordinate of car
@@ -39,10 +39,14 @@ public class Car extends Observable implements IVehicle, Observer{
 		ivCar.setX(getVehicleX());
 		ivCar.setY(getVehicleY());
 		Random ran = new Random();
-		if (ran.nextInt(1) == 1) {
+		//System.out.println(ran.nextInt(2));
+		if (ran.nextInt(2) == 1) {
 			headWest = true;
+			System.out.print("headed left");
 		} else {
 			headWest = false;
+			System.out.print("headed south");
+
 		}
 	}
 		
@@ -78,25 +82,26 @@ public class Car extends Observable implements IVehicle, Observer{
 			canMove = false;
 		
 		if (canMove){ 
-			/*if ((currentY > 782) && (currentY < 818)) {
-				if (headWest) {
+			
+			if (headWest && (currentY > 782) && (currentY < 818)) {
 					currentX-=speed;
-				}
+					
+					if (currentX > 370 && currentX < 390) {
+						headWest = false;
+					}
+				
 			} else {
 				currentY+=speed;
-			}*/
-			currentY+=speed;
+			}
+			
 		}
-		//ivCar.setX(currentX);
+		
+		
+		ivCar.setX(currentX);
 		ivCar.setY(currentY);
 		setChanged();
 		notifyObservers();
-		/*if (headWest) {
-			notifyObservers("Headed West");
-		} else if (headWest) {
-			notifyObservers("Headed South");
 
-		}*/
 
 	}
 	
@@ -130,6 +135,10 @@ public class Car extends Observable implements IVehicle, Observer{
 	public void removeLeadCar(){
 		leadCarY = -1;
 	}
+	
+	/*public Car getLeadCar() {
+		
+	}*/
 
 	@Override
 	public void update(Observable o, Object arg1) {

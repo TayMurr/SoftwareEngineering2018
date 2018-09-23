@@ -25,13 +25,12 @@ public class Road {
 	
 	public Road(){}
 	
-	public Road(Point start, Point end, Direction direction, boolean buildCarFactory, boolean clearEnds){
+	public Road(Point start, Point end, Direction direction, boolean buildFactory, boolean clearEnds){
 		startX = start.x;
 		startY = start.y;
 		endX = end.x;
 		endY = end.y;
 		roadSize = 18;
-		
 		this.direction = direction;
 		gates = new Vector<CrossingGate>();
 		this.clearEnds = clearEnds;
