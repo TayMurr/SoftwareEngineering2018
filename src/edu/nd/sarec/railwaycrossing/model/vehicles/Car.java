@@ -136,13 +136,11 @@ public class Car extends Observable implements IVehicle, Observer {
 	}
 	
 	public double getDistanceToLeadCarX() {
-		System.out.println("calculating x distance");
 		return Math.abs(leadCarX-getVehicleX());
 		
 	}
 	
 	public double getDistanceToLeadCarY() {
-		System.out.println("calculating y distance");
 		return Math.abs(leadCarY-getVehicleY());
 	}
 	
