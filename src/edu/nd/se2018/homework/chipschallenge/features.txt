@@ -1,0 +1,7 @@
+keys to unlock doors
+portal to next level
+fixed terrain
+impassable walls
+animated monters
+-> ghosts (slow speed, observers of chip)
+-> spiders (fast speed)
