@@ -2,6 +2,7 @@ package edu.nd.se2018.homework.chipschallenge.model.sprites;
 
 import java.awt.Point;
 
+import edu.nd.se2018.homework.chipschallenge.model.level.GameGrid;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,8 +13,10 @@ public class Chip {
 	private Image img;
 	private ImageView imgView;
 	private int scale = 25;
+	GameGrid gameGrid;
 	
-	public Chip(Point position, int scale) {
+	
+	public Chip(Point position, int scale, GameGrid gameGrid) {
 		this.positionX = position.x;
 		this.positionY = position.y;
 		this.scale = scale;
@@ -21,6 +24,7 @@ public class Chip {
 		imgView = new ImageView(img);
 		imgView.setX(this.positionX * scale);
 		imgView.setY(this.positionY * scale);
+		this.gameGrid = gameGrid;
 	}
 	
 	public Node getImageView() {
@@ -28,20 +32,38 @@ public class Chip {
 	}
 	
 	public void moveLeft() {
-		positionX -= 1;
+	
+		int temp = positionX - 1;
+
+		if (temp > -1 && gameGrid.gameGrid[temp][positionY] != true) {
+			this.positionX = temp;
+		}
 	}
 	
 	public void moveRight() {
-		positionX += 1;
+		
+		int temp = positionX + 1;
+		
+		if (temp < gameGrid.dimensions && gameGrid.gameGrid[temp][positionY] != true) {
+			this.positionX = temp;
+		}
 	}
 
 	public void moveDown() {
-		positionY += 1;
-	
+		int temp = positionY + 1;
+
+		if (temp < gameGrid.dimensions && gameGrid.gameGrid[positionX][temp] != true) {
+			this.positionY = temp;
+		}
 	}
 
 	public void moveUp() {
-		positionY -= 1;
+		
+		int temp = positionY - 1;
+
+		if (temp > -1 && gameGrid.gameGrid[positionX][temp] != true) {
+			this.positionY = temp;
+		}
 	}
 	
 	public void setImageViewXY() {
@@ -50,13 +72,15 @@ public class Chip {
 	}
 
 	public int getChipLocationX() {
-		// TODO Auto-generated method stub
 		return positionX;
 	}
 	
 	public int getChipLocationY() {
-		// TODO Auto-generated method stub
 		return positionY;
+	}
+	
+	public Point getChipPoint() {
+		return new Point(positionX, positionY);
 	}
 
 }

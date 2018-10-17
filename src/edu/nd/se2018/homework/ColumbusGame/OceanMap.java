@@ -15,6 +15,7 @@ public class OceanMap {
 	final int dimensions = 25;
 	int scale;
 	int islands = 10;
+	
 	public void drawMap(ObservableList<Node> root, int scale) {
 		this.scale = scale;
 		for (int x = 0; x < dimensions; x++) {

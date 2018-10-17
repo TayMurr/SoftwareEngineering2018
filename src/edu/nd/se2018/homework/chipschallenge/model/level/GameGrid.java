@@ -1,21 +1,28 @@
 package edu.nd.se2018.homework.chipschallenge.model.level;
 
-import java.util.Random;
 
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
+
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
 public class GameGrid {
 
-	Boolean gameGrid[][] = new Boolean [25][25];
-	final int dimensions = 25;
+	public Boolean gameGrid[][] = new Boolean [25][25];
+	public final int dimensions = 25;
 	int scale;
-	
-	public void drawMap(ObservableList<Node> root, int scale) {
+	int portalX = 12;
+	int portalY = 0;
+	private AnchorPane root;
+
+	public GameGrid(AnchorPane root) {
+		this.root = root;
+	}
+
+
+	public void drawMap(int scale) {
 		this.scale = scale;
 		for (int x = 0; x < dimensions; x++) {
 			for (int y = 0; y < dimensions; y++) {
@@ -23,29 +30,74 @@ public class GameGrid {
 				rect.setStroke(Color.BLACK);
 				Image img = new Image("/images/textures/BlankTile.png");
 				rect.setFill(new ImagePattern(img));
-				root.add(rect);
+				root.getChildren().add(rect);
 				gameGrid[x][y] = false;
 			}
 		}
 		
+		Rectangle rect = new Rectangle(portalX * scale, portalY * scale, scale, scale);
+		rect.setStroke(Color.BLUE);
+		Image img = new Image("/images/textures/portal.png");
+		rect.setFill(new ImagePattern(img));
+		root.getChildren().add(rect);
+		
+		//aesthetics
+		
+		
+		
 	}
 	
-	/*
-	public void placeIslands(ObservableList<Node> root) {
-		Random r = new Random();
-		int i = 0;
-		int randX, randY;
-		while (i < islands) {
-			randX = r.nextInt(dimensions);
-			randY = r.nextInt(dimensions);
-			if (oceanGrid[randX][randY] != true) {
-				Rectangle rect = new Rectangle(randX * scale, randY * scale, scale, scale);
-				rect.setStroke(Color.BLACK);
-				rect.setFill(Color.ANTIQUEWHITE);
-				root.add(rect);
-				oceanGrid[randX][randY] = true;
-				i++;
-			}
+	
+	public void drawLevelOne() {
+		// Borders
+		drawVerticalLine(0, 0, 24);
+		drawVerticalLine(24, 0, 24);
+		drawHorizontalLine(1, 1, 11);
+		drawHorizontalLine(13, 1, 23);
+
+		//Left Rooms
+		drawVerticalLine(6, 2, 5);
+		drawHorizontalLine(1, 5, 4);
+		drawVerticalLine(4, 7, 9);
+		drawHorizontalLine(1, 8, 4);
+		drawHorizontalLine(1, 11, 10);
+		drawVerticalLine(4, 11, 17);
+		drawHorizontalLine(4, 17, 20);
+		
+		// Right Rooms
+		
+		drawVerticalLine(18, 2, 5);
+		drawHorizontalLine(20, 5, 23);
+		drawVerticalLine(20, 7, 9);
+		drawHorizontalLine(21, 8, 23);
+		drawHorizontalLine(14, 11, 23);
+		drawVerticalLine(12, 11, 17);
+		drawVerticalLine(20, 11, 17);
+
+	}
+	
+	
+	public void drawVerticalLine(int startX, int startY, int endY) {
+		for (int y = startY; y <= endY && y < dimensions; y++) {
+			Rectangle rect = new Rectangle(startX * scale, y * scale, scale, scale);
+			rect.setStroke(Color.BLACK);
+
+			Image img = new Image("/images/textures/darktile.png");
+			rect.setFill(new ImagePattern(img));
+			root.getChildren().add(rect);
+			gameGrid[startX][y] = true;
 		}
-	}*/
+	}
+	
+	public void drawHorizontalLine(int startX, int startY, int endX) {
+		for (int x = startX; x <= endX && x < dimensions; x++) {
+			Rectangle rect = new Rectangle(x * scale, startY * scale, scale, scale);
+			rect.setStroke(Color.BLACK);
+
+			Image img = new Image("/images/textures/darktile.png");
+			rect.setFill(new ImagePattern(img));
+			root.getChildren().add(rect);
+			gameGrid[x][startY] = true;
+		}
+	}
 }

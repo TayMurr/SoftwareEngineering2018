@@ -1,13 +1,18 @@
 package edu.nd.se2018.homework.chipschallenge;
 
 import java.awt.Point;
+import java.util.HashMap;
 
 import edu.nd.se2018.homework.chipschallenge.model.level.GameGrid;
 import edu.nd.se2018.homework.chipschallenge.model.level.LevelBuilder;
 import edu.nd.se2018.homework.chipschallenge.model.sprites.Chip;
+import edu.nd.se2018.homework.chipschallenge.model.sprites.ComputerChip;
+import edu.nd.se2018.homework.chipschallenge.model.sprites.Door;
+import edu.nd.se2018.homework.chipschallenge.model.sprites.Key;
 import edu.nd.se2018.homework.chipschallenge.view.LevelDisplay;
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -15,26 +20,41 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class Game  extends Application {
-	private LevelBuilder levelBuilder;
 	private LevelDisplay levelDisplay;
+	private LevelBuilder levelBuilder;
 	private GameGrid gameGrid;
 	private AnchorPane root;
+	private HashMap<Point, ComputerChip> compchips;
+	private HashMap<Point, Door> doors;
+	private HashMap<Point, Key> keys;
+
 	ImageView chipImageView;
 
 	private Chip chip;
 	private Scene scene;
-	final int scale = 50;
+	final int scale = 25;
+	int chipCount = 11;
 	@Override
 	public void start(Stage stage) throws Exception {
 		root = new AnchorPane();
-		gameGrid = new GameGrid();
-		gameGrid.drawMap(root.getChildren(), scale);
-		levelDisplay = new LevelDisplay(root);					
+		gameGrid = new GameGrid(root);
+		gameGrid.drawMap(scale);
+		gameGrid.drawLevelOne(); // draw level one
+		// build the level objects
+		levelBuilder = new LevelBuilder(root, gameGrid);
+		levelBuilder.buildLvlOne();
+		levelDisplay = new LevelDisplay(root, gameGrid);
 		
-		chip = new Chip(new Point( 0, 0), scale);
+		compchips = levelBuilder.getComputerChips();
+		doors = levelBuilder.getDoors();
+		keys = levelBuilder.getKeys();
+		
+		levelDisplay.drawLevelOne(compchips, doors, keys);
+		
+		chip = new Chip(new Point(12, 4), scale, gameGrid);
 		chipImageView = (ImageView) chip.getImageView();
 		chipImageView.setX(chip.getChipLocationX() * scale);
-		chipImageView.setX(chip.getChipLocationX() * scale);
+		chipImageView.setY(chip.getChipLocationY() * scale);
 		root.getChildren().add(chipImageView);
 
 		scene = new Scene(root, 625, 625);
@@ -44,6 +64,8 @@ public class Game  extends Application {
 		
 		startGamePlay();
 	}
+	
+
 	
 
 	private void startGamePlay(){
@@ -69,10 +91,21 @@ public class Game  extends Application {
     				default:
     					break;	
     			}
+    			Point chipP = chip.getChipPoint();
+    			chipImageView.setX(chipP.x * scale);
+    			chipImageView.setY(chipP.y * scale);
     			
-    			chipImageView.setX(chip.getChipLocationX() * scale);
-    			chipImageView.setY(chip.getChipLocationY() * scale);
-			
+    			if (compchips.containsKey(chipP)) {
+    		    	compchips.get(chipP).remove();
+    				compchips.remove(chipP);
+    				chipCount -= 1;
+    				
+    			}
+    			
+    			if (keys.containsKey(chipP)) {
+    				keys.get(chipP).remove();
+    			}
+    			
     		}						
         });
     }
