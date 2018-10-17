@@ -42,25 +42,51 @@ public class LevelBuilder {
 		
 		// lay out lvl one key doors
 		DoorFactory doorFactory = new DoorFactory();
-	
-		doors.put(new Point(5, 5), doorFactory.createDoor("green", root, gameGrid, new Point(5, 5)));
-		doors.put(new Point(4, 6), doorFactory.createDoor("blue", root, gameGrid, new Point(4, 6)));
-		doors.put(new Point(4, 10), doorFactory.createDoor("red", root, gameGrid, new Point(4, 10)));
-		doors.put(new Point(11, 11), doorFactory.createDoor("yellow", root, gameGrid, new Point(11, 11)));
-		doors.put(new Point(13, 11), doorFactory.createDoor("yellow", root, gameGrid, new Point(13, 11)));
-		doors.put(new Point(19, 5), doorFactory.createDoor("green", root, gameGrid, new Point(19, 5)));
-		doors.put(new Point(20, 6), doorFactory.createDoor("red", root, gameGrid, new Point(20, 6)));
-		doors.put(new Point(20, 10), doorFactory.createDoor("blue", root, gameGrid, new Point(20, 10)));
+		Door greenDoor1 = doorFactory.createDoor("green", root, gameGrid, new Point(5, 5));
+		Door blueDoor1 = doorFactory.createDoor("blue", root, gameGrid, new Point(4, 6));
+		Door redDoor1 = doorFactory.createDoor("red", root, gameGrid, new Point(4, 10));
+		Door yellowDoor1 = doorFactory.createDoor("yellow", root, gameGrid, new Point(11, 11));
+		Door yellowDoor2 = doorFactory.createDoor("yellow", root, gameGrid, new Point(13, 11));
+		Door greenDoor2 = doorFactory.createDoor("green", root, gameGrid, new Point(19, 5));
+		Door redDoor2 = doorFactory.createDoor("red", root, gameGrid, new Point(20, 6));
+		Door blueDoor2 = doorFactory.createDoor("blue", root, gameGrid, new Point(20, 10));
+		doors.put(new Point(5, 5), greenDoor1);
+		doors.put(new Point(4, 6), blueDoor1);
+		doors.put(new Point(4, 10), redDoor1);
+		doors.put(new Point(11, 11), yellowDoor1);
+		doors.put(new Point(13, 11), yellowDoor2);
+		doors.put(new Point(19, 5), greenDoor2);
+		doors.put(new Point(20, 6), redDoor2);
+		doors.put(new Point(20, 10), blueDoor2);
 		
 		// layout lvl one keys
+		Key yellowkey1 = new Key(root, "yellow");
+		yellowkey1.addObserver(yellowDoor1);
+		keys.put(new Point(2, 6), yellowkey1);
 		
-		keys.put(new Point(2, 6), new Key(root, "yellow"));
-		keys.put(new Point(22, 6), new Key(root, "yellow"));
-		keys.put(new Point(5, 7), new Key(root, "blue"));
-		keys.put(new Point(5, 9), new Key(root, "blue"));
-		keys.put(new Point(19, 7), new Key(root, "red"));
-		keys.put(new Point(19, 9), new Key(root, "red"));
-		keys.put(new Point(13, 16), new Key(root, "green"));
+		Key yellowkey2 = new Key(root, "yellow");
+		yellowkey2.addObserver(yellowDoor2);
+		keys.put(new Point(22, 6), yellowkey2);
+		
+		Key bluekey1 = new Key(root, "blue");
+		bluekey1.addObserver(blueDoor1);
+		keys.put(new Point(5, 7), bluekey1);
+		
+		Key bluekey2 = new Key(root, "blue");
+		bluekey2.addObserver(blueDoor2);
+		keys.put(new Point(5, 9), bluekey2);
+		
+		Key redkey1 = new Key(root, "red");
+		redkey1.addObserver(redDoor1);
+		keys.put(new Point(19, 7), redkey1);
+		
+		Key redkey2 = new Key(root, "red");
+		redkey2.addObserver(redDoor2);
+		keys.put(new Point(19, 9), redkey2);
+		
+		Key greenkey1 = new Key(root, "green");
+		greenkey1.addObserver(greenDoor1);
+		keys.put(new Point(13, 16), greenkey1);
 
 	}
 	
