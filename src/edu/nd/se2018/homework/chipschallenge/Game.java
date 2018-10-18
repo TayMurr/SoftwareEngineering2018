@@ -5,11 +5,11 @@ import java.util.HashMap;
 
 import edu.nd.se2018.homework.chipschallenge.model.level.GameGrid;
 import edu.nd.se2018.homework.chipschallenge.model.level.LevelBuilder;
-import edu.nd.se2018.homework.chipschallenge.model.sprites.Bug;
 import edu.nd.se2018.homework.chipschallenge.model.sprites.Chip;
 import edu.nd.se2018.homework.chipschallenge.model.sprites.ComputerChip;
 import edu.nd.se2018.homework.chipschallenge.model.sprites.Door;
 import edu.nd.se2018.homework.chipschallenge.model.sprites.Key;
+import edu.nd.se2018.homework.chipschallenge.model.sprites.Sprite;
 import edu.nd.se2018.homework.chipschallenge.view.LevelDisplay;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -28,12 +28,12 @@ public class Game  extends Application {
 	private HashMap<Point, ComputerChip> compchips;
 	private HashMap<Point, Door> doors;
 	private HashMap<Point, Key> keys;
-	private HashMap<Point, Bug> bugs;
+	private HashMap<Point, Sprite> bugs;
 	private Door levelGate;
 	private Point portalPoint;
 	ImageView chipImageView;
 
-	private Chip chip;
+	private Sprite chip;
 	private Scene scene;
 	private int level = 1;
 	final int scale = 25;
@@ -89,16 +89,24 @@ public class Game  extends Application {
     			switch(ke.getCode()){
 
     				case RIGHT:
+    					root.getChildren().remove(chip.getImageView());
     					chip.moveRight();
+    					root.getChildren().add(chip.getImageView());
     					break;
     				case LEFT:
+    					root.getChildren().remove(chip.getImageView());
     					chip.moveLeft();
+    					root.getChildren().add(chip.getImageView());
     					break;
     				case DOWN:
+    					root.getChildren().remove(chip.getImageView());
     					chip.moveDown();
+    					root.getChildren().add(chip.getImageView());
     					break;
     				case UP:
+    					root.getChildren().remove(chip.getImageView());
     					chip.moveUp();
+    					root.getChildren().add(chip.getImageView());
     					break;
     				default:
     					break;	
@@ -154,8 +162,10 @@ public class Game  extends Application {
     			}
     			
     			if (level == 2) {
-    				for (Bug b: bugs.values()) {
+    				for (Sprite b: bugs.values()) {
+    					root.getChildren().remove(b.getImageView());
     					b.move();
+    					root.getChildren().add(b.getImageView());
     					b.getImageViewXY().setX(b.getLocationX() * scale);
     					b.getImageViewXY().setY(b.getLocationY() * scale);
     					

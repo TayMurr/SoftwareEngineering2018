@@ -7,9 +7,9 @@ import edu.nd.se2018.homework.chipschallenge.model.sprites.Bug;
 import edu.nd.se2018.homework.chipschallenge.model.sprites.ComputerChip;
 import edu.nd.se2018.homework.chipschallenge.model.sprites.Door;
 import edu.nd.se2018.homework.chipschallenge.model.sprites.DoorFactory;
-import edu.nd.se2018.homework.chipschallenge.model.sprites.Frog;
 import edu.nd.se2018.homework.chipschallenge.model.sprites.Key;
 import edu.nd.se2018.homework.chipschallenge.model.sprites.PortalGate;
+import edu.nd.se2018.homework.chipschallenge.model.sprites.Sprite;
 import javafx.scene.layout.AnchorPane;
 
 
@@ -21,14 +21,14 @@ public class LevelBuilder {
 	HashMap<Point, Key> keys;
 	Door levelGate;
 	DoorFactory doorFactory;
-	HashMap<Point, Bug> bugs;
+	HashMap<Point, Sprite> bugs;
 	int scale = 25;
 	
 	public LevelBuilder(AnchorPane root, GameGrid gameGrid) {
 		compChips = new HashMap<Point, ComputerChip>();
 		doors = new HashMap<Point, Door>();
 		keys = new HashMap<Point, Key>();
-		bugs = new HashMap<Point, Bug>();
+		bugs = new HashMap<Point, Sprite>();
 		this.root = root;
 		this.gameGrid = gameGrid;
 		doorFactory = new DoorFactory();
@@ -179,7 +179,7 @@ public class LevelBuilder {
 		return keys;
 	}
 	
-	public HashMap<Point, Bug> getBugs() {
+	public HashMap<Point, Sprite> getBugs() {
 		return bugs;
 	}
 	

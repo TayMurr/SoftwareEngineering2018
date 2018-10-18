@@ -3,95 +3,36 @@ package edu.nd.se2018.homework.chipschallenge.model.sprites;
 import java.awt.Point;
 
 import edu.nd.se2018.homework.chipschallenge.model.level.GameGrid;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class Chip {
-	private int positionX = 0;
-	private int positionY = 0;
-	private Image img;
-	private ImageView imgView;
-	private int scale = 25;
-	GameGrid gameGrid;
-	
-	
+public class Chip extends Sprite {
+
 	public Chip(Point position, int scale, GameGrid gameGrid) {
-		this.positionX = position.x;
-		this.positionY = position.y;
-		this.scale = scale;
-		img = new Image("images/textures/chipDown.png", scale, scale, false,false);
-		imgView = new ImageView(img);
-		imgView.setX(this.positionX * scale);
-		imgView.setY(this.positionY * scale);
-		this.gameGrid = gameGrid;
+		super(position, scale, gameGrid);
+		setImage("images/textures/chipDown.png");
 	}
-	
-	public Node getImageView() {
-		return imgView;
-	}
-	
-	public void moveLeft() {
-	
-		int temp = positionX - 1;
 
-		if (temp > -1 && gameGrid.gameGrid[temp][positionY] != true) {
-			this.positionX = temp;
+	@Override
+	public void setImage(String direction) {
+		// TODO Auto-generated method stub
+		if (direction.equals("left")) {
+			
+			imgView = new ImageView(new Image("images/textures/chipLeft.png", scale, scale, false, false));
+		} else if (direction.equals("right")) {
+			imgView = new ImageView(new Image("images/textures/chipRight.png", scale, scale, false, false));
+
+		} else if (direction.equals("up")) {
+			imgView = new ImageView(new Image("images/textures/chipUp.png", scale, scale, false, false));
+
+		} else if (direction.equals("down")) {
+			imgView = new ImageView(new Image("images/textures/chipDown.png", scale, scale, false, false));
+
 		}
-	}
-	
-	public void moveRight() {
 		
-		int temp = positionX + 1;
-		
-		if (temp < gameGrid.dimensions && gameGrid.gameGrid[temp][positionY] != true) {
-			this.positionX = temp;
-		}
-	}
-
-	public void moveDown() {
-		int temp = positionY + 1;
-
-		if (temp < gameGrid.dimensions && gameGrid.gameGrid[positionX][temp] != true) {
-			this.positionY = temp;
-		}
-	}
-
-	public void moveUp() {
-		
-		int temp = positionY - 1;
-
-		if (temp > -1 && gameGrid.gameGrid[positionX][temp] != true) {
-			this.positionY = temp;
-		}
-	}
-	
-	public void setImageViewXY() {
 		imgView.setX(positionX * scale);
 		imgView.setY(positionY * scale);
 	}
 
-	public ImageView getImageViewXY() {
-		return imgView;
-	}
-	
-	public int getLocationX() {
-		return positionX;
-	}
-	
-	public int getLocationY() {
-		return positionY;
-	}
-	
-	public Point getPoint() {
-		return new Point(positionX, positionY);
-	}
-
-	public void setPosition(Point point) {
-		positionX = point.x;
-		positionY = point.y;
-		imgView.setX(this.positionX * scale);
-		imgView.setY(this.positionY * scale);
-	}
 
 }

@@ -5,6 +5,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 import edu.nd.se2018.homework.chipschallenge.model.level.GameGrid;
+import edu.nd.se2018.homework.chipschallenge.view.DoorImageSelector;
+import edu.nd.se2018.homework.chipschallenge.view.IImageSelector;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
@@ -14,11 +16,14 @@ public class Door implements Observer{
 	protected ImageView imgView;
 	private Point position;
 	protected int scale = 25;
+	protected IImageSelector imageSelector;
+	
 	public Door (AnchorPane root, GameGrid gameGrid, Point p) {
 		this.root = root;
 		this.gameGrid = gameGrid;
 		this.position = p;
 		gameGrid.gameGrid[position.x][position.y] = true;
+		imageSelector = new DoorImageSelector();
 
 	}
 	public void unlock() {

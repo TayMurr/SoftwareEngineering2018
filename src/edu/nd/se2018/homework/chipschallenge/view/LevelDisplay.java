@@ -4,11 +4,10 @@ import java.awt.Point;
 import java.util.HashMap;
 
 import edu.nd.se2018.homework.chipschallenge.model.level.GameGrid;
-import edu.nd.se2018.homework.chipschallenge.model.sprites.Bug;
 import edu.nd.se2018.homework.chipschallenge.model.sprites.ComputerChip;
 import edu.nd.se2018.homework.chipschallenge.model.sprites.Door;
-import edu.nd.se2018.homework.chipschallenge.model.sprites.Frog;
 import edu.nd.se2018.homework.chipschallenge.model.sprites.Key;
+import edu.nd.se2018.homework.chipschallenge.model.sprites.Sprite;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -37,7 +36,7 @@ public class LevelDisplay {
 
 
 
-	public void drawLevelTwo(HashMap<Point, ComputerChip> compChips, HashMap<Point, Door> doors, HashMap<Point, Key> keys, Door levelGate, HashMap<Point, Bug> bugs) {
+	public void drawLevelTwo(HashMap<Point, ComputerChip> compChips, HashMap<Point, Door> doors, HashMap<Point, Key> keys, Door levelGate, HashMap<Point, Sprite> bugs) {
 		drawCompChips(compChips);
 		drawDoors(doors);
 		drawKeys(keys);
@@ -82,18 +81,8 @@ public class LevelDisplay {
 		imgView.setY(p.y * scale);
 		root.getChildren().add(imgView);
 	}
-	
-	private void drawFrogs(HashMap<Point, Frog> frogs) {
-		for (Point p: frogs.keySet()) {
-			ImageView imgView = frogs.get(p).getImageViewXY();
-			imgView.setX(p.x * scale);
-			imgView.setY(p.y * scale);
-			root.getChildren().add(imgView);
-		}
-		
-	}
 
-	private void drawBugs(HashMap<Point, Bug> bugs) {
+	private void drawBugs(HashMap<Point, Sprite> bugs) {
 		for (Point p: bugs.keySet()) {
 			ImageView imgView = bugs.get(p).getImageViewXY();
 			imgView.setX(p.x * scale);

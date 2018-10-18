@@ -3,10 +3,10 @@ package edu.nd.se2018.homework.chipschallenge.view;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class KeyImageSelector {
+public class KeyImageSelector implements IImageSelector {
 	private int scale = 25;
 	
-	public ImageView selectKeyColor(String keyColor) {
+	public ImageView selectColor(String keyColor) {
 		if (keyColor.equals("blue")) {
 			return new ImageView(new Image("images/textures/blueKey.png", scale, scale, false,false));
 			
