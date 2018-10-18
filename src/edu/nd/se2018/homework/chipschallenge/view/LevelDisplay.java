@@ -24,7 +24,7 @@ public class LevelDisplay {
 		this.root = root;
 	
 	}
-
+	// display all the level one components
 	public void drawLevelOne(HashMap<Point, ComputerChip> compChips, HashMap<Point, Door> doors, HashMap<Point, Key> keys, 
 			Door levelGate) {
 		drawCompChips(compChips);
@@ -35,7 +35,7 @@ public class LevelDisplay {
 	}
 
 
-
+	// display all the level two components
 	public void drawLevelTwo(HashMap<Point, ComputerChip> compChips, HashMap<Point, Door> doors, HashMap<Point, Key> keys, Door levelGate, HashMap<Point, Sprite> bugs) {
 		drawCompChips(compChips);
 		drawDoors(doors);
@@ -44,6 +44,7 @@ public class LevelDisplay {
 		drawBugs(bugs);
 	}
 	
+	// draw the computer chips
 	public void drawCompChips(HashMap<Point, ComputerChip> compChips) {
 		for (Point p: compChips.keySet()) {
 			Rectangle rect = new Rectangle(p.x * scale, p.y * scale, scale, scale);
@@ -56,6 +57,7 @@ public class LevelDisplay {
 		}
 	}
 	
+	// draw the doors
 	public void drawDoors(HashMap<Point, Door> doors) {
 		for (Point p: doors.keySet()) {
 			ImageView imgView = doors.get(p).getImageView();
@@ -65,6 +67,7 @@ public class LevelDisplay {
 		}
 	}
 	
+	// draw the keys
 	public void drawKeys(HashMap<Point, Key> keys) {
 		for (Point p: keys.keySet()) {
 			ImageView imgView = keys.get(p).getImageView();
@@ -73,7 +76,8 @@ public class LevelDisplay {
 			root.getChildren().add(imgView);
 		}
 	}
-
+	
+	// draw level gates
 	public void drawLevelGate(Door levelGate) {
 		ImageView imgView = levelGate.getImageView();
 		Point p = levelGate.getDoorPoint();
@@ -82,6 +86,7 @@ public class LevelDisplay {
 		root.getChildren().add(imgView);
 	}
 
+	// draw bugs
 	private void drawBugs(HashMap<Point, Sprite> bugs) {
 		for (Point p: bugs.keySet()) {
 			ImageView imgView = bugs.get(p).getImageViewXY();

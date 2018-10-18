@@ -6,6 +6,7 @@ import edu.nd.se2018.homework.chipschallenge.model.level.GameGrid;
 import javafx.scene.layout.AnchorPane;
 
 public class DoorFactory {
+	// produce a door of the specified color
 	public Door createDoor(String doorType, AnchorPane root, GameGrid gameGrid, Point p) {
 		
 		if (doorType.equals("blue")) {

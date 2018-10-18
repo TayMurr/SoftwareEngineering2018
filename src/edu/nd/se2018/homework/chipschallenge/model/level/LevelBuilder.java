@@ -110,13 +110,14 @@ public class LevelBuilder {
 	
 	public void buildLvlTwo() {
 		clearLevel();
+		// lay out the computer chips
 		compChips.put(new Point(4, 21), new ComputerChip(root));
 		compChips.put(new Point(20, 16), new ComputerChip(root));
 		compChips.put(new Point(4, 13), new ComputerChip(root));
 		compChips.put(new Point(19, 9), new ComputerChip(root));
 		compChips.put(new Point(4, 5), new ComputerChip(root));
 		compChips.put(new Point(21, 3), new ComputerChip(root));
-		
+		// lay out level 2 doors
 		Door blueDoor1 = doorFactory.createDoor("blue", root, gameGrid, new Point(19, 3));
 		Door redDoor1 = doorFactory.createDoor("red", root, gameGrid, new Point(12, 7));
 		Door yellowDoor1 = doorFactory.createDoor("yellow", root, gameGrid, new Point(12, 11));
@@ -129,7 +130,7 @@ public class LevelBuilder {
 		doors.put(new Point(12, 15), greenDoor1);
 		doors.put(new Point(12, 19), blueDoor2);
 		
-	
+		// lay out level 2 keys
 		Key bluekey1 = new Key(root, "blue");
 		bluekey1.addObserver(blueDoor2);
 		keys.put(new Point(5, 21), bluekey1);
@@ -149,7 +150,7 @@ public class LevelBuilder {
 		Key bluekey2 = new Key(root, "blue");
 		bluekey2.addObserver(blueDoor1);
 		keys.put(new Point(5, 5), bluekey2);
-
+		// layout level 2 bugs
 		bugs.put(new Point(2, 19), new Bug(new Point(2, 19), scale , gameGrid));
 		bugs.put(new Point(17, 7), new Bug(new Point(17, 7), scale , gameGrid));
 		bugs.put(new Point(2, 11), new Bug(new Point(2, 11), scale , gameGrid));

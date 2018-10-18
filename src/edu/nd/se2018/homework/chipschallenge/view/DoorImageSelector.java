@@ -5,7 +5,7 @@ import javafx.scene.image.ImageView;
 
 public class DoorImageSelector implements IImageSelector {
 private int scale = 25;
-	
+	// select the door of the corresponding color
 	public ImageView selectColor(String keyColor) {
 		if (keyColor.equals("blue")) {
 			return new ImageView(new Image("images/textures/blueKeyWall.png", scale, scale, false,false));

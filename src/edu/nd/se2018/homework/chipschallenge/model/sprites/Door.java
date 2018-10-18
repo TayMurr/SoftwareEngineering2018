@@ -26,7 +26,12 @@ public class Door implements Observer{
 		imageSelector = new DoorImageSelector();
 
 	}
-	public void unlock() {
+	
+	/*
+	 * When unlocking the door, the door should be removed from the screen and the gameGrid should
+	 * be updated to chip can pass that point.
+	 */
+	public void unlock() { 
 		root.getChildren().remove(imgView);
 		gameGrid.gameGrid[position.x][position.y] = false;
 	}

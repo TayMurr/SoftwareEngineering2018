@@ -15,7 +15,7 @@ public class Chip extends Sprite {
 
 	@Override
 	public void setImage(String direction) {
-		// TODO Auto-generated method stub
+		// choose chips image so he is facing the right direction
 		if (direction.equals("left")) {
 			
 			imgView = new ImageView(new Image("images/textures/chipLeft.png", scale, scale, false, false));

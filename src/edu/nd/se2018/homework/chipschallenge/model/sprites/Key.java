@@ -15,12 +15,12 @@ public class Key extends Observable {
 	
 	public Key (AnchorPane root, String keyColor) {
 		this.root = root;
-		imgSelector = new KeyImageSelector();
+		imgSelector = new KeyImageSelector(); // select Key image
 		imgView = imgSelector.selectColor(keyColor);		
 	}
 	
 
-
+	// key should be removed from screen
 	public void remove() {
 		root.getChildren().remove(imgView);
 		setChanged();

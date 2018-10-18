@@ -51,7 +51,7 @@ public class Game  extends Application {
 		// build the level objects
 		levelBuilder = new LevelBuilder(root, gameGrid);
 		levelBuilder.buildLvlOne();
-		
+		// Display the levels
 		levelDisplay = new LevelDisplay(root, gameGrid);
 		
 		compchips = levelBuilder.getComputerChips();
@@ -60,7 +60,7 @@ public class Game  extends Application {
 		levelGate = levelBuilder.getLevelGate();
 		
 		levelDisplay.drawLevelOne(compchips, doors, keys, levelGate);
-		
+		// Draw Chips
 		chip = new Chip(new Point(12, 4), scale, gameGrid);
 		chipImageView = (ImageView) chip.getImageView();
 		chipImageView.setX(chip.getLocationX() * scale);
@@ -114,7 +114,7 @@ public class Game  extends Application {
     			Point chipP = chip.getPoint();
     			chipImageView.setX(chipP.x * scale);
     			chipImageView.setY(chipP.y * scale);
-    			
+    			// if chip grabs a computer chip decrement the count
     			if (compchips.containsKey(chipP)) {
     		    	compchips.get(chipP).remove();
     				compchips.remove(chipP);
@@ -122,23 +122,24 @@ public class Game  extends Application {
     				
     			}
     			
+    			// if chip is on a Key
     			if (keys.containsKey(chipP)) {
 
     				keys.get(chipP).remove();
     			}
-    			
+    			// if all the chips have been collected unlock the level Gate
     			if (chipCount == 0) {
 
     				levelGate.unlock();
     			}
     			
     			
-    			
+    			// if chip is in the portal and in level one transition to level 2
     			if (chipP.x == portalPoint.x && chipP.y == portalPoint.y && level == 1) {
     				
-    				root.getChildren().clear();
+    				root.getChildren().clear(); // clear the old level
     				level = 2;
-    				chipCount = 6;
+    				chipCount = 6; // there are only 6 chips on level 2
     				gameGrid.drawLevelTwo();
     				levelBuilder.buildLvlTwo();	
     				
@@ -157,11 +158,12 @@ public class Game  extends Application {
     				root.getChildren().add(chipImageView);
     				
     			} else if (chipP.x == portalPoint.x && chipP.y == portalPoint.y && level == 2) {
+    				// if chip is in the portal and in level 2 then the player has won the game
     				System.out.println("Winner");
     				Platform.exit();
     			}
     			
-    			if (level == 2) {
+    			if (level == 2) { // if in level 2 update the bugs
     				for (Sprite b: bugs.values()) {
     					root.getChildren().remove(b.getImageView());
     					b.move();

@@ -31,6 +31,7 @@ public abstract class Sprite {
 		setImage("up");
 	}
 	
+	// each spite needs to set its images differently
 	public abstract void setImage(String direction);
 	
 	public Node getImageView() {
@@ -106,7 +107,7 @@ public abstract class Sprite {
 		imgView.setX(this.positionX * scale);
 		imgView.setY(this.positionY * scale);
 	}
-
+	// for the bugs automatic movememts
 	public void move() {
 		
 		if (positionX < startX + pathWidth && positionY < startY + pathHeight) {

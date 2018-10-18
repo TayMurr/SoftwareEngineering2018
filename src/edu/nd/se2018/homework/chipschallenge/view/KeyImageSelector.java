@@ -5,7 +5,7 @@ import javafx.scene.image.ImageView;
 
 public class KeyImageSelector implements IImageSelector {
 	private int scale = 25;
-	
+	// select the key of the specified color
 	public ImageView selectColor(String keyColor) {
 		if (keyColor.equals("blue")) {
 			return new ImageView(new Image("images/textures/blueKey.png", scale, scale, false,false));
