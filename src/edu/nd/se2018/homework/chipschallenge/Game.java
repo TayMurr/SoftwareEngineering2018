@@ -9,7 +9,6 @@ import edu.nd.se2018.homework.chipschallenge.model.sprites.Bug;
 import edu.nd.se2018.homework.chipschallenge.model.sprites.Chip;
 import edu.nd.se2018.homework.chipschallenge.model.sprites.ComputerChip;
 import edu.nd.se2018.homework.chipschallenge.model.sprites.Door;
-import edu.nd.se2018.homework.chipschallenge.model.sprites.Frog;
 import edu.nd.se2018.homework.chipschallenge.model.sprites.Key;
 import edu.nd.se2018.homework.chipschallenge.view.LevelDisplay;
 import javafx.application.Application;
@@ -39,6 +38,7 @@ public class Game  extends Application {
 	private int level = 1;
 	final int scale = 25;
 	int chipCount = 11;
+	
 	@Override
 	public void start(Stage stage) throws Exception {
 		root = new AnchorPane();
