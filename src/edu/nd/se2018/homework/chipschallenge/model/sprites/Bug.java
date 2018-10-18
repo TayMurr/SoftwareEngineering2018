@@ -7,20 +7,28 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class Chip {
+public class Bug {
 	private int positionX = 0;
 	private int positionY = 0;
 	private Image img;
 	private ImageView imgView;
 	private int scale = 25;
+	private int startX;
+	private int startY;
+	private int pathWidth = 5;
+	private int pathHeight = 2;
+	private int seconds = 0;
 	GameGrid gameGrid;
 	
 	
-	public Chip(Point position, int scale, GameGrid gameGrid) {
+	
+	public Bug(Point position, int scale, GameGrid gameGrid) {
 		this.positionX = position.x;
 		this.positionY = position.y;
 		this.scale = scale;
-		img = new Image("images/textures/chipDown.png", scale, scale, false,false);
+		this.startX = position.x;
+		this.startY = position.y;
+		img = new Image("images/textures/bugUp.png", scale, scale, false, false);
 		imgView = new ImageView(img);
 		imgView.setX(this.positionX * scale);
 		imgView.setY(this.positionY * scale);
@@ -66,15 +74,15 @@ public class Chip {
 		}
 	}
 	
+	public ImageView getImageViewXY() {
+		return imgView;
+	}
+	
 	public void setImageViewXY() {
 		imgView.setX(positionX * scale);
 		imgView.setY(positionY * scale);
 	}
 
-	public ImageView getImageViewXY() {
-		return imgView;
-	}
-	
 	public int getLocationX() {
 		return positionX;
 	}
@@ -94,4 +102,20 @@ public class Chip {
 		imgView.setY(this.positionY * scale);
 	}
 
+	public void move() {
+		
+		if (positionX < startX + pathWidth && positionY < startY + pathHeight) {
+			moveRight();
+		} 
+		if (positionX == startX + pathWidth && positionY < startY + pathHeight) {
+			moveDown();
+		} 
+		if (positionY == startY + pathHeight && positionX <= startX + pathWidth) {
+			moveLeft();
+		}
+		if (positionX == startX && positionY <= startY + pathHeight) {
+			moveUp();
+		}
+		
+	}
 }

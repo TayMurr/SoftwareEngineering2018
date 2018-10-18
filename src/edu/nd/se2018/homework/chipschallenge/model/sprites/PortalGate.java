@@ -1,7 +1,6 @@
 package edu.nd.se2018.homework.chipschallenge.model.sprites;
 
 import java.awt.Point;
-import java.util.Observable;
 import java.util.Observer;
 
 import edu.nd.se2018.homework.chipschallenge.model.level.GameGrid;

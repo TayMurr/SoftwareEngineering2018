@@ -29,6 +29,10 @@ public class Door implements Observer{
 		return imgView;
 	}
 	
+	public Point getDoorPoint() {
+		return position;
+	}
+	
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof Key) {

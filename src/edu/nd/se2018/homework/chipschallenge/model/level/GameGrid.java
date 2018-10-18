@@ -13,8 +13,8 @@ public class GameGrid {
 	public Boolean gameGrid[][] = new Boolean [25][25];
 	public final int dimensions = 25;
 	int scale;
-	int portalX = 12;
-	int portalY = 0;
+	public int portalX = 12;
+	public int portalY = 0;
 	private AnchorPane root;
 
 	public GameGrid(AnchorPane root) {
@@ -39,11 +39,7 @@ public class GameGrid {
 		rect.setStroke(Color.BLUE);
 		Image img = new Image("/images/textures/portal.png");
 		rect.setFill(new ImagePattern(img));
-		root.getChildren().add(rect);
-		
-		//aesthetics
-		
-		
+		root.getChildren().add(rect);		
 		
 	}
 	
@@ -76,6 +72,35 @@ public class GameGrid {
 
 	}
 	
+	public void drawLevelTwo() {
+		drawMap(scale);
+		// vertical borders
+		drawVerticalLine(0, 2, 24);
+		drawVerticalLine(24, 2, 24);
+		// top bars
+		drawHorizontalLine(0, 0, 11);
+		drawHorizontalLine(13, 0, 24);
+		drawHorizontalLine(0, 1, 11);
+		drawHorizontalLine(13, 1, 24);
+		
+		drawHorizontalLine(8, 21, 23);
+		drawHorizontalLine(1, 17, 16);
+		drawHorizontalLine(8, 13, 23);
+		drawHorizontalLine(1, 9, 16);	
+		drawHorizontalLine(8, 5, 23);
+		
+		drawVerticalLine(12, 20, 20);
+		drawVerticalLine(12, 16, 18);
+		drawVerticalLine(12, 12, 14);
+		drawVerticalLine(12, 8, 10);
+		drawVerticalLine(12, 4, 6);
+		drawVerticalLine(19, 2, 2);
+		drawVerticalLine(19, 4, 4);
+
+
+
+	}
+	
 	
 	public void drawVerticalLine(int startX, int startY, int endY) {
 		for (int y = startY; y <= endY && y < dimensions; y++) {
@@ -100,4 +125,7 @@ public class GameGrid {
 			gameGrid[x][startY] = true;
 		}
 	}
+
+
+
 }

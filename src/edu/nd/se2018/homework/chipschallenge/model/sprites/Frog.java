@@ -7,7 +7,8 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class Chip {
+public class Frog {
+
 	private int positionX = 0;
 	private int positionY = 0;
 	private Image img;
@@ -16,11 +17,11 @@ public class Chip {
 	GameGrid gameGrid;
 	
 	
-	public Chip(Point position, int scale, GameGrid gameGrid) {
+	public Frog(Point position, int scale, GameGrid gameGrid) {
 		this.positionX = position.x;
 		this.positionY = position.y;
 		this.scale = scale;
-		img = new Image("images/textures/chipDown.png", scale, scale, false,false);
+		img = new Image("images/textures/frog.png", scale, scale, false, false);
 		imgView = new ImageView(img);
 		imgView.setX(this.positionX * scale);
 		imgView.setY(this.positionY * scale);
@@ -66,15 +67,15 @@ public class Chip {
 		}
 	}
 	
+	public ImageView getImageViewXY() {
+		return imgView;
+	}
+	
 	public void setImageViewXY() {
 		imgView.setX(positionX * scale);
 		imgView.setY(positionY * scale);
 	}
 
-	public ImageView getImageViewXY() {
-		return imgView;
-	}
-	
 	public int getLocationX() {
 		return positionX;
 	}
@@ -83,7 +84,7 @@ public class Chip {
 		return positionY;
 	}
 	
-	public Point getPoint() {
+	public Point getChipPoint() {
 		return new Point(positionX, positionY);
 	}
 
@@ -94,4 +95,8 @@ public class Chip {
 		imgView.setY(this.positionY * scale);
 	}
 
+	public void move() {
+		
+		
+	}
 }
